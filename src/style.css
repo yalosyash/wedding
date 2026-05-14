@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  background-color: #f5e6d3; /* цвет, если фон временно не подгрузился */
 }
 
 .scroll-bg {
@@ -21,47 +20,104 @@ body {
 .header-image {
   position: absolute;
   left: 50%;
-  top: 60%;
-  transform: translateX(-50%);
-  width: 80%;
+  top: 50%;
+  width: 76%;
   height: auto;
   z-index: 1;
-
   opacity: 0;
-  transform: translateX(-50%) translateY(-2%);
+  transform: translateX(-50%) translateY(95%);
   animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.5s;
 }
 
 @keyframes fadeInUp {
   to {
     opacity: 1;
-    transform: translateX(-50%); /* финальная позиция */
+    transform: translateX(-50%) translateY(99.5%);
   }
 }
 
-/* Контент поверх всего */
+.styleMan-image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-45%) translateY(1671%);
+  width: 17%;
+  height: auto;
+  z-index: 2;
+}
+
+.stars-image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(1369%);
+  width: 60%;
+  height: auto;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1.5s ease-out;
+}
+
+.stars-image.visible {
+  opacity: 1;
+}
+
 .content {
   position: relative;
   z-index: 2;
 }
 
-/* Для всех экранов по умолчанию — резина */
 body,
 .scroll-bg,
 .content {
   width: 100%;
 }
 
-/* Только для экранов шире 768px (ПК, ноутбуки) */
 @media (min-width: 769px) {
   body {
-    max-width: 1200px; /* или любое другое значение */
-    margin: 0 auto; /* центрируем */
-    background-color: #f5e6d3; /* цвет по бокам от ограниченного контента */
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffd6b0;
   }
 
   .scroll-bg {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
+  }
+}
+
+body.preload * {
+  animation: none !important;
+  transition: none !important;
+  opacity: 0 !important;
+}
+
+body.preload {
+  background-color: #e1b48a;
+}
+
+body.preload::after {
+  content: "";
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px; /* половина ширины */
+  margin-top: -20px; /* половина высоты */
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  z-index: 9999;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
