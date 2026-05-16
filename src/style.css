@@ -1,111 +1,213 @@
-body {
-  margin: 0;
+@font-face {
+  font-family: "LovelaceTextRegular"; /* Название, которое вы будете использовать в коде */
+  src: url("fonts/LovelaceTextRegular.ttf") format("truetype"); /* Путь к файлу шрифта */
+  font-display: swap; /* Показывает системный шрифт, пока грузится ваш */
 }
 
+/* ----- БАЗА ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #e1b48a;
+}
+
+/* Контейнер всей страницы — реальная высота = 5400px */
+.page {
+  position: relative;
+  width: 100%;
+  max-width: 457px; /* ширина твоего макета */
+  margin: 0 auto; /* по центру */
+  background-color: #e1b48a;
+  overflow-x: hidden;
+}
+
+@media (min-width: 800px) {
+  .page {
+    transform: scale(1.8); /* увеличить на 10% */
+    transform-origin: top center;
+  }
+}
+
+/* Блок с фоном и всем содержимым */
 .scroll-bg {
   position: relative;
   width: 100%;
+  height: 5400px; /* чёткая высота макета */
 }
 
+/* Фоновая картинка */
 .bg-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 5400px;
+  object-fit: cover;
   display: block;
   z-index: 0;
 }
 
+/* ----- ХЕДЕР (появляется сам при загрузке) ----- */
 .header-image {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 300px; /* ровно по макету */
+  transform: translateX(-50%);
   width: 76%;
   height: auto;
   z-index: 1;
   opacity: 0;
-  transform: translateX(-50%) translateY(95%);
   animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.5s;
+  animation-delay: 0.3s;
 }
 
 @keyframes fadeInUp {
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(99.5%);
+    transform: translateX(-50%) translateY(0);
   }
 }
 
-.styleMan-image {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-45%) translateY(1671%);
-  width: 17%;
-  height: auto;
-  z-index: 2;
-}
-
+/* ----- ЗВЁЗДЫ (появляются при скролле) ----- */
 .stars-image {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(1369%);
+  top: 3155px;
+  transform: translateX(-50%);
   width: 60%;
   height: auto;
   z-index: 1;
   opacity: 0;
-  transition: opacity 1.5s ease-out;
+  transition: opacity 1s ease;
 }
 
 .stars-image.visible {
   opacity: 1;
 }
 
-.content {
-  position: relative;
+/* ----- ЧЕЛОВЕК (всегда виден) ----- */
+.styleMan-image {
+  position: absolute;
+  left: 50%;
+  top: 3169px;
+  transform: translateX(-50%);
+  width: 17%;
+  height: auto;
   z-index: 2;
 }
 
-body,
-.scroll-bg,
-.content {
-  width: 100%;
+/* ----- ЛАМПОЧКИ (появляются со звёздами) ----- */
+.light {
+  position: absolute;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+  animation: breathe 2.5s ease-in-out infinite;
+  opacity: 0;
+  transform-origin: center;
 }
 
-@media (min-width: 769px) {
-  body {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #ffd6b0;
+.light::before {
+  content: "✦";
+  position: absolute;
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: 0 0 8px #ffcc33;
+  /* background: radial-gradient(circle, #fffbe6, #000000); */
+  /* border-radius: 50%; */
+  /* filter: blur(5px); */
+  transform: translate(-50%, -50%);
+}
+/* Анимация дыхания света */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.7) scaleY(1);
+    filter: blur(1px);
+    box-shadow: 0 0 2px 1px #ff0000;
   }
-
-  .scroll-bg {
-    max-width: 900px;
-    margin: 0 auto;
+  50% {
+    opacity: 1;
+    transform: scale(1.3) scaleY(1.5);
+    filter: blur(2px);
+    box-shadow: 0 0 15px 5px #ffffff;
   }
 }
 
-body.preload * {
-  animation: none !important;
-  transition: none !important;
+.light-1 {
+  left: 15.2%;
+  top: 3725px;
+  animation-delay: 0s;
+}
+.light-2 {
+  left: 34%;
+  top: 3760px;
+  animation-delay: 0.8s;
+}
+.light-3 {
+  left: 46.3%;
+  top: 3701px;
+  animation-delay: 0.6s;
+}
+.light-4 {
+  left: 68%;
+  top: 3709px;
+  animation-delay: 0.3s;
+}
+.light-5 {
+  left: 84%;
+  top: 3815px;
+  animation-delay: 1.2s;
+}
+
+/* ----- КНОПКА КАРТ ----- */
+.map-button {
+  position: absolute;
+  left: 50%;
+  top: 3944px;
+  transform: translateX(-50%);
+  display: inline-block;
+  background: #b87c4f;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-family: "LovelaceTextRegular", sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.map-button:hover {
+  background: #9b5e3a;
+}
+
+/* ----- ПРЕЛОАДЕР ----- */
+body.preload .header-image,
+body.preload .stars-image,
+body.preload .light,
+body.preload .map-button {
   opacity: 0 !important;
-}
-
-body.preload {
-  background-color: #e1b48a;
+  animation: none !important;
 }
 
 body.preload::after {
   content: "";
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
   width: 40px;
   height: 40px;
-  margin-left: -20px; /* половина ширины */
-  margin-top: -20px; /* половина высоты */
+  margin-left: -20px;
+  margin-top: -20px;
   border: 4px solid rgba(255, 255, 255, 0.3);
   border-top: 4px solid #fff;
   border-radius: 50%;

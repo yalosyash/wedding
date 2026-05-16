@@ -1,10 +1,10 @@
+// Убираем прелоад после полной загрузки
 window.addEventListener("load", function () {
-  setTimeout(function () {
-    document.body.classList.remove("preload");
-    initScrollAnimations();
-  }, 50);
+  document.body.classList.remove("preload");
+  initScrollAnimations();
 });
 
+// Анимация при скролле — звёзды
 function initScrollAnimations() {
   const starsImage = document.querySelector(".stars-image");
   if (starsImage) {
