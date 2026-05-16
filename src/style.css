@@ -208,3 +208,37 @@ body.preload::after {
     transform: rotate(360deg);
   }
 }
+
+@media (min-width: 780px) {
+  body {
+    max-width: 780px;
+    margin: 0 auto;
+    background-color: #ffd6b0;
+  }
+
+  .scroll-bg {
+    max-width: 780px;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    padding-bottom: 1182%; /* сохраняет пропорции 457×5400 */
+  }
+
+  /* Остальные стили на ПК — в пикселях */
+  .header-image { top: 510px; }
+  .stars-image { top: 5380px; }
+  .styleMan-image { top: 5408px; }
+  .light-1 { top: 6365px; }
+  .light-2 { top: 6422px; }
+  .light-3 { top: 6325px; }
+  .light-4 { top: 6332px; }
+  .light-5 { top: 6516px; }
+  .map-button { top: 6732px;}
+
+  .light::before { font-size: 30px; }
+  .map-button { 
+    padding: 18px 45px;
+    font-size: 20px;
+    border-radius: 26px;
+  }
+}
